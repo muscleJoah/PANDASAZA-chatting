@@ -12,11 +12,13 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+    compile.exclude module: 'spring-boot-starter-logging'
 }
 
 repositories {
     mavenCentral()
 }
+
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -30,8 +32,24 @@ dependencies {
     implementation 'org.webjars:stomp-websocket:2.3.3-1'
     implementation 'com.google.code.gson:gson:2.8.0'
 
+    //레디스
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+    //embedded-redis
+    compile group: 'it.ozimov', name: 'embedded-redis', version: '0.7.3'
+
+
+
 }
+//
+//bootRun{
+  //  String activeProfile = System.properties['spring.profiles.active']
+  //  systemProperty "spring.profiles.active", activeProfile
+//}
+
 
