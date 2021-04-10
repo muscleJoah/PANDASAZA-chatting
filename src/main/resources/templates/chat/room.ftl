@@ -16,16 +16,16 @@
 <div class="container" id="app" v-cloak>
     <div class="row">
         <div class="col-md-12">
-            <h3>채팅방 리스트</h3>
+            <h3>채팅방</h3>
         </div>
     </div>
     <div class="input-group">
         <div class="input-group-prepend">
-            <label class="input-group-text">방제목</label>
+            <label class="input-group-text">방이름</label>
         </div>
         <input type="text" class="form-control" v-model="room_name" @keyup.enter="createRoom">
         <div class="input-group-append">
-            <button class="btn btn-primary" type="button" @click="createRoom">채팅방 개설</button>
+            <button class="btn btn-primary" type="button" @click="createRoom">채팅방 만들기</button>
         </div>
     </div>
     <ul class="list-group">
@@ -64,16 +64,16 @@
                     axios.post('/chat/room', params)
                         .then(
                             response => {
-                                alert(response.data.name+"방 개설에 성공하였습니다.")
+                                alert(response.data.name+"방 개설 성공.")
                                 this.room_name = '';
                                 this.findAllRoom();
                             }
                         )
-                        .catch( response => { alert("채팅방 개설에 실패하였습니다."); } );
+                        .catch( response => { alert("채팅방 개설 실패."); } );
                 }
             },
             enterRoom: function(roomId) {
-                var sender = prompt('대화명을 입력해 주세요.');
+                var sender = prompt('대화명을 입력.');
                 localStorage.setItem('wschat.sender',sender);
                 localStorage.setItem('wschat.roomId',roomId);
                 location.href="/chat/room/enter/"+roomId;
