@@ -2,6 +2,7 @@ package com.websocket.chat.controller;
 
 import com.websocket.chat.model.ChatMessage;
 import com.websocket.chat.pubsub.RedisPublisher;
+import com.websocket.chat.repo.ChatMessageRepository;
 import com.websocket.chat.repo.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -15,7 +16,7 @@ public class ChatController {
 
     private final RedisPublisher redisPublisher;
     private final ChatRoomRepository chatRoomRepository;
-
+    private final ChatMessageRepository chatMessageRepository;
 
      //websocket "/pub/chat/message"로 들어오는 메시징을 처리
 
@@ -27,5 +28,6 @@ public class ChatController {
         }
         // Websocket에 발행된 메시지를 redis로 발행한다(publish)
         redisPublisher.publish(chatRoomRepository.getTopic(message.getRoomId()), message);
+        chatMessageRepository.createChatMessage(message);
     }
 }
