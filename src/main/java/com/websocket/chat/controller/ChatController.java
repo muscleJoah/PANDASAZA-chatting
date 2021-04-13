@@ -39,7 +39,7 @@ public class ChatController {
 
     @GetMapping("/chat/messageList/{roomId}")
     @ResponseBody
-    public void findMessage(@PathVariable String roomId){
-        chatMessageRepository.findMessageByRoomId(roomId);
+    public List<ChatMessage> findMessage(@PathVariable String roomId){
+        return chatMessageRepository.findMessageByRoomId(roomId);
     }
 }

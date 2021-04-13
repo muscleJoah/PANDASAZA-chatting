@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class ChatMessage {
+public class ChatMessage implements Serializable{
     // 메시지 타입 : 입장, 채팅
     public enum MessageType {
         ENTER, TALK

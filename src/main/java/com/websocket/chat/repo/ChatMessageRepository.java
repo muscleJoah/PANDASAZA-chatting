@@ -8,6 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
@@ -15,16 +16,17 @@ public class ChatMessageRepository {
 
 
     private ListOperations<String, ChatMessage> opsListChatMessage;
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, ChatMessage> redisTemplate;
     private static final String Chat_Message = "Chat_Message";
 
-    // 해시를 <Chat_Messages, sender(), roomid())git p
+
+    //TODO -- 채팅방삭제.
+    //권민준사랑해
     @PostConstruct
     public void init() { opsListChatMessage = redisTemplate.opsForList(); }
 
-    public void findMessageByRoomId(String roomId) {
-
-         System.out.println(opsListChatMessage.leftPop(roomId).toString());
+    public List<ChatMessage> findMessageByRoomId(String roomId) {
+         return opsListChatMessage.range(roomId,0,opsListChatMessage.size(roomId)-1);
     }
 
     public ChatMessage createChatMessage(ChatMessage Message) {
