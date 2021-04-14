@@ -8,6 +8,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,17 +23,21 @@ public class ChatMessageRepository {
 
 
     //TODO -- 채팅방삭제.
-    //권민준사랑해
+
     @PostConstruct
-    public void init() { opsListChatMessage = redisTemplate.opsForList(); }
+    public void init() {
+        opsListChatMessage = redisTemplate.opsForList();
+    }
 
     public List<ChatMessage> findMessageByRoomId(String roomId) {
-         return opsListChatMessage.range(roomId,0,opsListChatMessage.size(roomId)-1);
+        return opsListChatMessage.range(roomId, 0, opsListChatMessage.size(roomId) - 1);
     }
 
     public ChatMessage createChatMessage(ChatMessage Message) {
-            opsListChatMessage.rightPush(Message.getRoomId(),Message);
-            return Message;
-
+        Date date_now = new Date(System.currentTimeMillis());
+        Message.setSendDate(date_now.toString());
+        opsListChatMessage.rightPush(Message.getRoomId(), Message);
+        return Message;
     }
+
 }

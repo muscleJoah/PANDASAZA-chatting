@@ -66,4 +66,6 @@ public class ChatRoomRepository {
     public ChannelTopic getTopic(String roomId) {
         return topics.get(roomId);
     }
+//TODO -- FIX Delete error
+    public void deleteRoom(String roomId){  opsHashChatRoom.delete(CHAT_ROOMS,roomId); }
 }

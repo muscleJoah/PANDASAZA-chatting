@@ -73,7 +73,7 @@
             }
         }
     });
-    // pub/sub event
+    // pub/sub
     ws.connect({}, function(frame) {
         ws.subscribe("/sub/chat/room/"+vm.$data.roomId, function(message) {
             var recv = JSON.parse(message.body);

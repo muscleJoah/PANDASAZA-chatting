@@ -34,7 +34,6 @@ public class ChatController {
         chatMessageRepository.createChatMessage(message);
         redisPublisher.publish(chatRoomRepository.getTopic(message.getRoomId()), message);
 
-        System.out.println("테스트되나?");
     }
 
     @GetMapping("/chat/messageList/{roomId}")

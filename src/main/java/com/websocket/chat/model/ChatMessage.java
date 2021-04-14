@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -18,5 +19,5 @@ public class ChatMessage implements Serializable{
     private String roomId; // 방번호
     private String sender; // 메시지 보낸사람
     private String message; // 메시지
-
+    private String sendDate; //보낸시간.
 }

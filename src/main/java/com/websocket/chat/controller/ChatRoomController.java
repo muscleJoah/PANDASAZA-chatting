@@ -45,4 +45,10 @@ public class ChatRoomController {
     public ChatRoom roomInfo(@PathVariable String roomId) {
         return chatRoomRepository.findRoomById(roomId);
     }
+
+    @PostMapping("/room/delete/{roomId}")
+    public String delete(@PathVariable String roomId){
+        chatRoomRepository.deleteRoom(roomId);
+        return roomId;
+    }
 }
